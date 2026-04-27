@@ -1,0 +1,22 @@
+{
+  "@context": "https://spec.projectnanda.org/agentfacts/v1.2.jsonld",
+  "id": "did:nanda:styledesk-agent-001",
+  "handle": "@styledesk-agent",
+  "endpoint": "https://styledesk-agent-246551819686.us-central1.run.app/a2a",
+  "capabilities": [
+    "urn:nanda:cap:conversational-styling:v1",
+    "urn:nanda:cap:price-negotiation:v1",
+    "urn:nanda:cap:price-comparison:v1",
+    "urn:nanda:cap:preference-memory:v1"
+  ],
+  "auth": {
+    "method": "api_key",
+    "header": "X-API-Key",
+    "howToGet": "https://styledesk-agent-246551819686.us-central1.run.app/request-access"
+  },
+  "meta": {
+    "description": "Conversational fashion stylist with negotiation capabilities",
+    "builtWith": "Google ADK for Java",
+    "collaborates": "fashion-agent"
+  }
+}
