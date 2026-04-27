@@ -1,0 +1,6 @@
+com/example/styledesk/NestHeartbeat.class
+com/example/styledesk/StyleDeskServer.class
+com/example/styledesk/CorsFilter.class
+com/example/styledesk/ProductSearchTool.class
+com/example/styledesk/StyleDeskAgent.class
+com/example/styledesk/PreferenceStore.class
