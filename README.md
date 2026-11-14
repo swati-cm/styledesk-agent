@@ -161,7 +161,6 @@ curl -X POST https://styledesk-agent-246551819686.us-central1.run.app/a2a \
 | GCP Region | `us-central1` |
 | Service Account | `fashion-agent-sa@fashion-agent-494222.iam.gserviceaccount.com` |
 | Model | `gemini-2.5-flash` @ global |
-| SerpAPI Key | `5bb018a0341d6ebf3bc13451142a8399a2a2062432adc170569a04563ef2d310` |
 | Amazon Affiliate | `fashionagent2-20` |
 
 ---
