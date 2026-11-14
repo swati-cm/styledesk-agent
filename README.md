@@ -52,7 +52,7 @@ fashion-agent (A2A) + Google Shopping + Amazon (via SerpAPI)
 - Maven 3.9+
 - Google Cloud SDK with ADC credentials
 - Vertex AI enabled on GCP project `fashion-agent-494222`
-- SerpAPI key for product search
+- SerpAPI key for product search, supplied as the `SERPAPI_API_KEY` environment variable (never commit it)
 
 ### Start
 
@@ -89,6 +89,7 @@ gcloud run deploy styledesk-agent \
   --allow-unauthenticated \
   --service-account fashion-agent-sa@fashion-agent-494222.iam.gserviceaccount.com \
   --set-env-vars GOOGLE_GENAI_USE_VERTEXAI=true,GOOGLE_CLOUD_PROJECT=fashion-agent-494222,GOOGLE_CLOUD_LOCATION=global \
+  --update-secrets SERPAPI_API_KEY=serpapi-key:latest \
   --project=fashion-agent-494222
 ```
 

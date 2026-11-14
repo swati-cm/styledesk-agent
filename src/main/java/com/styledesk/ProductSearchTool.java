@@ -12,8 +12,9 @@ import java.util.*;
 @ApplicationScoped
 public class ProductSearchTool {
 
+    // Injected at runtime (Secret Manager on Cloud Run, shell export locally)
     private static final String SERP_API_KEY =
-        "5bb018a0341d6ebf3bc13451142a8399a2a2062432adc170569a04563ef2d310";
+        System.getenv("SERPAPI_API_KEY");
     private static final String SERP_BASE =
         "https://serpapi.com/search.json";
 
