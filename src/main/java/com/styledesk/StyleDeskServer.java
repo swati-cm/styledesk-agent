@@ -686,26 +686,45 @@ public class StyleDeskServer {
     @Path(".well-known/agent-card.json")
     @Produces(MediaType.APPLICATION_JSON)
     public Response agentCard() {
-        return Response.ok(Map.of(
-            "name", "styledesk-agent",
-            "description", "Sofia — a conversational personal stylist with negotiation skills. Remembers your preferences and helps you find the best fashion deals.",
-            "url", BASE_URL,
-            "version", "1.0.0",
-            "capabilities", Map.of("streaming", false, "memory", true),
-            "authentication", Map.of(
-                "type", "api_key",
-                "header", "X-API-Key",
-                "howToGet", "POST /request-access"
-            ),
-            "endpoints", Map.of(
-                "chat", "POST /chat — conversational with memory",
-                "a2a", "POST /a2a — A2A JSON-RPC",
-                "requestAccess", "POST /request-access"
-            ),
-            "connectedAgents", java.util.List.of(
-                "fashion-agent @ https://fashion-agent-246551819686.us-central1.run.app"
-            )
-        )).build();
+        java.util.function.BiFunction<String, String[], Map<String, Object>> skill = (id, v) -> Map.of(
+            "id", id, "name", v[0], "description", v[1], "tags", java.util.List.of("fashion", "shopping"));
+        Map<String, Object> card = new java.util.LinkedHashMap<>();
+        card.put("name", "styledesk-agent");
+        card.put("description", "Sofia — a conversational personal stylist with negotiation skills. Remembers your preferences and helps you find the best fashion deals.");
+        card.put("url", BASE_URL + "/a2a");
+        card.put("version", "1.0.0");
+        card.put("protocolVersion", "0.3.0");
+        card.put("preferredTransport", "JSONRPC");
+        card.put("capabilities", Map.of("streaming", false));
+        card.put("defaultInputModes", java.util.List.of("text/plain"));
+        card.put("defaultOutputModes", java.util.List.of("text/plain"));
+        card.put("skills", java.util.List.of(
+            skill.apply("conversational-styling", new String[]{"Conversational styling",
+                "Outfit and style advice in a multi-turn conversation."}),
+            skill.apply("price-negotiation", new String[]{"Price negotiation",
+                "Tactics for getting a better price on a chosen item."}),
+            skill.apply("price-comparison", new String[]{"Price comparison",
+                "Compares prices for a product across retailers."}),
+            skill.apply("preference-memory", new String[]{"Preference memory",
+                "Remembers a user's sizes, budget and tastes across turns."})
+        ));
+        card.put("securitySchemes", Map.of("apiKey", Map.of(
+            "type", "apiKey", "in", "header", "name", "X-API-Key")));
+        card.put("security", java.util.List.of(Map.of("apiKey", java.util.List.of())));
+        card.put("authentication", Map.of(
+            "type", "api_key",
+            "header", "X-API-Key",
+            "howToGet", BASE_URL + "/request-access"
+        ));
+        card.put("endpoints", Map.of(
+            "chat", "/chat",
+            "a2a", "/a2a",
+            "requestAccess", "/request-access"
+        ));
+        card.put("connectedAgents", java.util.List.of(
+            "fashion-agent @ https://fashion-agent-246551819686.us-central1.run.app"
+        ));
+        return Response.ok(card).build();
     }
 
     /** AgentFacts */
